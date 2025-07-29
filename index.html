@@ -1,80 +1,177 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <title>ورود به سرور</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ورود به سرور RGB</title>
   <style>
-    /* ... تمام استایل‌ها همون قبلی ... */
-    /* فقط برای خلاصه‌سازی در اینجا حذف شدن */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Tahoma, sans-serif;
+      background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
+      background-size: 600% 600%;
+      animation: backgroundRGB 10s ease infinite;
+      color: white;
+      overflow: hidden;
+    }
+
+    @keyframes backgroundRGB {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    #loader {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    .neon-loader {
+      width: 80px;
+      height: 80px;
+      border: 8px solid;
+      border-color: #00f7ff transparent #ff00c8 transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loader-text {
+      color: #0ff;
+      font-size: 20px;
+      margin-top: 20px;
+      animation: glow 1s ease-in-out infinite alternate;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #0ff; }
+      to { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
+    }
+
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .popup-content {
+      background: #111;
+      padding: 40px;
+      border-radius: 20px;
+      border: 2px solid cyan;
+      text-align: center;
+      box-shadow: 0 0 20px #0ff, 0 0 40px #f90, 0 0 60px #ff0;
+      animation: glowbox 2s infinite alternate;
+    }
+
+    @keyframes glowbox {
+      from {
+        box-shadow: 0 0 10px #0ff, 0 0 20px #f90;
+      }
+      to {
+        box-shadow: 0 0 20px #0ff, 0 0 40px #f90, 0 0 60px #ff0;
+      }
+    }
+
+    .popup h2, .popup p {
+      margin: 10px 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .connect-btn {
+      display: none;
+      margin: 30px auto;
+      padding: 15px 40px;
+      font-size: 20px;
+      background: limegreen;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 0 15px #0f0;
+    }
+
+    .connect-btn:hover {
+      background: #00cc00;
+    }
   </style>
 </head>
 <body>
 
-  <!-- لودینگ مدرن RGB -->
-  <div id="loader">
-    <div class="spinner"></div>
-    <div class="loading-text">در حال بارگذاری... لطفاً صبر کنید</div>
+<div id="loader">
+  <div class="neon-loader"></div>
+  <div class="loader-text">در حال بارگذاری...</div>
+</div>
+
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <button class="close-btn" onclick="closePopup()">&times;</button>
+    <h2>ورود شما تایید شد</h2>
+    <p>اشتراک فعال</p>
   </div>
+</div>
 
-  <!-- پیام تایید و اشتراک فعال -->
-  <div class="popup" id="popup">
-    <div class="message-box">
-      <button class="close-btn" onclick="closePopup()">×</button>
-      <h2>ورود شما تایید شد</h2>
-      <p>اشتراک فعال</p>
-      <div class="copy-section">
-        <input type="text" value="wii1-rFFa.aternos.me:22481" id="serverIP" class="copy-input" readonly>
-        <br>
-        <button class="copy-btn" onclick="copyIP()">کپی آدرس سرور</button>
-      </div>
-    </div>
-  </div>
+<center>
+  <button id="connectBtn" class="connect-btn" onclick="connectToMinecraft()">اتصال</button>
+</center>
 
-  <!-- دکمه اتصال -->
-  <center>
-    <button class="connect-btn" id="connectBtn" onclick="connectToMinecraft()">اتصال</button>
-  </center>
+<script>
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      document.getElementById("loader").style.display = "none";
+    }, 2000);
+  });
 
-  <!-- اسکریپت‌های سایت -->
-  <script>
-    window.addEventListener("load", () => {
-      const loader = document.getElementById("loader");
-      loader.classList.add("hidden");
-    });
+  function closePopup() {
+    document.getElementById("popup").style.display = "none";
+    document.getElementById("connectBtn").style.display = "inline-block";
+  }
 
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("connectBtn").style.display = "inline-block";
-    }
+  function connectToMinecraft() {
+    const ip = "wii1-rFFa.aternos.me:22481";
+    alert("برای اتصال به سرور Minecraft در TLauncher، این IP را وارد کنید: \n\n" + ip);
+  }
+</script>
 
-    function connectToMinecraft() {
-      const serverIP = "wii1-rFFa.aternos.me:22481";
-      alert("برای اتصال به سرور، آدرس زیر را در Minecraft → Multiplayer وارد کنید:\n\n" + serverIP);
-    }
-
-    function copyIP() {
-      const ipField = document.getElementById("serverIP");
-      ipField.select();
-      ipField.setSelectionRange(0, 99999);
-      document.execCommand("copy");
-      alert("آدرس سرور کپی شد!");
-    }
-  </script>
-
-  <!-- Start of Tawk.to Script -->
-  <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-  var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-  s1.async=true;
-  s1.src='https://embed.tawk.to/6888efa4db7610192eeae974/1j1beg73n';
-  s1.charset='UTF-8';
-  s1.setAttribute('crossorigin','*');
-  s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script>
-  <!-- End of Tawk.to Script -->
+<!-- پشتیبانی آنلاین -->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6888efa4db7610192eeae974/1j1beg73n';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
 
 </body>
 </html>
