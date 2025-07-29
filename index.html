@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
   <title>ورود به سرور RGB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
@@ -17,9 +17,15 @@
     }
 
     @keyframes backgroundRGB {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     #loader {
@@ -51,19 +57,29 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px #0ff; }
-      to { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
+      from {
+        text-shadow: 0 0 10px #0ff;
+      }
+      to {
+        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
+      }
     }
 
     .popup {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.8);
       display: flex;
       align-items: center;
@@ -79,6 +95,7 @@
       text-align: center;
       box-shadow: 0 0 20px #0ff, 0 0 40px #f90, 0 0 60px #ff0;
       animation: glowbox 2s infinite alternate;
+      position: relative;
     }
 
     @keyframes glowbox {
@@ -90,7 +107,8 @@
       }
     }
 
-    .popup h2, .popup p {
+    .popup h2,
+    .popup p {
       margin: 10px 0;
     }
 
@@ -103,6 +121,14 @@
       background: transparent;
       border: none;
       cursor: pointer;
+      text-shadow: 0 0 5px #ff3, 0 0 10px #f90, 0 0 20px #f90, 0 0 30px #ff3;
+      transition: all 0.3s ease;
+      animation: neonPulse 2s infinite alternate;
+    }
+    .close-btn:hover {
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ff3, 0 0 20px #ff9900, 0 0 40px #ffcc00, 0 0 60px #ffaa00;
+      transform: scale(1.2);
     }
 
     .connect-btn {
@@ -115,63 +141,83 @@
       border-radius: 10px;
       color: white;
       cursor: pointer;
-      box-shadow: 0 0 15px #0f0;
+      box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0, 0 0 40px #0f0;
+      transition: all 0.3s ease;
+      animation: neonPulseGreen 2s infinite alternate;
     }
-
     .connect-btn:hover {
       background: #00cc00;
+      box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0, 0 0 80px #0f0;
+      transform: scale(1.1);
+    }
+
+    @keyframes neonPulse {
+      0% {
+        text-shadow: 0 0 5px #ff3, 0 0 10px #f90, 0 0 20px #f90, 0 0 30px #ff3;
+      }
+      100% {
+        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 40px #ffcc00, 0 0 60px #ffcc00;
+      }
+    }
+
+    @keyframes neonPulseGreen {
+      0% {
+        box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0, 0 0 40px #0f0;
+      }
+      100% {
+        box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0, 0 0 80px #0f0;
+      }
     }
   </style>
 </head>
 <body>
-
-<div id="loader">
-  <div class="neon-loader"></div>
-  <div class="loader-text">در حال بارگذاری...</div>
-</div>
-
-<div class="popup" id="popup">
-  <div class="popup-content">
-    <button class="close-btn" onclick="closePopup()">&times;</button>
-    <h2>ورود شما تایید شد</h2>
-    <p>اشتراک فعال</p>
+  <div id="loader">
+    <div class="neon-loader"></div>
+    <div class="loader-text">در حال بارگذاری...</div>
   </div>
-</div>
 
-<center>
-  <button id="connectBtn" class="connect-btn" onclick="connectToMinecraft()">اتصال</button>
-</center>
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closePopup()">&times;</button>
+      <h2>ورود شما تایید شد</h2>
+      <p>اشتراک فعال</p>
+    </div>
+  </div>
 
-<script>
-  window.addEventListener("load", () => {
-    setTimeout(() => {
-      document.getElementById("loader").style.display = "none";
-    }, 2000);
-  });
+  <center>
+    <button id="connectBtn" class="connect-btn" onclick="connectToMinecraft()">اتصال</button>
+  </center>
 
-  function closePopup() {
-    document.getElementById("popup").style.display = "none";
-    document.getElementById("connectBtn").style.display = "inline-block";
-  }
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+      }, 2000);
+    });
 
-  function connectToMinecraft() {
-    const ip = "wii1-rFFa.aternos.me:22481";
-    alert("برای اتصال به سرور Minecraft در TLauncher، این IP را وارد کنید: \n\n" + ip);
-  }
-</script>
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+      document.getElementById("connectBtn").style.display = "inline-block";
+    }
 
-<!-- پشتیبانی آنلاین -->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6888efa4db7610192eeae974/1j1beg73n';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
+    function connectToMinecraft() {
+      const ip = "wii1-rFFa.aternos.me:22481";
+      alert("برای اتصال به سرور Minecraft در TLauncher، این IP را وارد کنید: \n\n" + ip);
+    }
+  </script>
 
+  <!-- پشتیبانی آنلاین -->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = "https://embed.tawk.to/6888efa4db7610192eeae974/1j1beg73n";
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
 </body>
 </html>
