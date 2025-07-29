@@ -14,21 +14,68 @@
     }
 
     body {
-      height: 100vh;
-      background: linear-gradient(135deg, #000000, #1a1a1a, #0f0f0f);
+      background: linear-gradient(135deg, #000000, #1a1a1a);
       color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
+      overflow: hidden;
     }
 
+    /* لودینگ مدرن */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 1s ease, visibility 1s;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .spinner {
+      width: 80px;
+      height: 80px;
+      border: 8px solid transparent;
+      border-top: 8px solid #00ffff;
+      border-right: 8px solid #ff00ff;
+      border-bottom: 8px solid #00ff00;
+      border-left: 8px solid #ffcc00;
+      border-radius: 50%;
+      animation: spin 1.2s linear infinite;
+      box-shadow: 0 0 20px #0ff, 0 0 40px #f0f, 0 0 60px #0f0;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00ffff, #ff00ff, #00ff00, #ffcc00);
+      background-size: 400% 400%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: textGlow 4s ease infinite;
+    }
+
+    @keyframes textGlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* پیام تأیید */
     .popup {
       position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      top: 0; right: 0; bottom: 0; left: 0;
       background: rgba(0, 0, 0, 0.95);
       display: flex;
       align-items: center;
@@ -47,12 +94,8 @@
     }
 
     @keyframes neon {
-      from {
-        box-shadow: 0 0 10px cyan, 0 0 20px orange;
-      }
-      to {
-        box-shadow: 0 0 20px yellow, 0 0 40px cyan;
-      }
+      from { box-shadow: 0 0 10px cyan, 0 0 20px orange; }
+      to { box-shadow: 0 0 20px yellow, 0 0 40px cyan; }
     }
 
     .message-box h2 {
@@ -91,7 +134,7 @@
       border-radius: 12px;
       cursor: pointer;
       transition: transform 0.3s ease;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .connect-btn:hover {
@@ -130,6 +173,13 @@
 </head>
 <body>
 
+  <!-- لودینگ مدرن RGB -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <div class="loading-text">در حال بارگذاری... لطفاً صبر کنید</div>
+  </div>
+
+  <!-- پیام تایید و اشتراک فعال -->
   <div class="popup" id="popup">
     <div class="message-box">
       <button class="close-btn" onclick="closePopup()">×</button>
@@ -143,9 +193,18 @@
     </div>
   </div>
 
-  <button class="connect-btn" id="connectBtn" onclick="connectToMinecraft()">اتصال</button>
+  <!-- دکمه اتصال -->
+  <center>
+    <button class="connect-btn" id="connectBtn" onclick="connectToMinecraft()">اتصال</button>
+  </center>
 
   <script>
+    // وقتی همه‌چی لود شد، لودینگ محو و سایت ظاهر می‌شود
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      loader.classList.add("hidden");
+    });
+
     function closePopup() {
       document.getElementById("popup").style.display = "none";
       document.getElementById("connectBtn").style.display = "inline-block";
@@ -154,14 +213,12 @@
     function connectToMinecraft() {
       const serverIP = "wii1-rFFa.aternos.me:22481";
       alert("برای اتصال به سرور، آدرس زیر را در Minecraft → Multiplayer وارد کنید:\n\n" + serverIP);
-      // در صورت پشتیبانی از minecraft:// (معمولاً نه در TLauncher)
-      // window.location.href = `minecraft://${serverIP}`;
     }
 
     function copyIP() {
       const ipField = document.getElementById("serverIP");
       ipField.select();
-      ipField.setSelectionRange(0, 99999); // موبایل ساپورت
+      ipField.setSelectionRange(0, 99999);
       document.execCommand("copy");
       alert("آدرس سرور کپی شد!");
     }
@@ -169,3 +226,4 @@
 
 </body>
 </html>
+
