@@ -421,13 +421,30 @@
 
 
 
+<!-- Popup (ورود شما تایید شد) -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <button class="close-btn" onclick="closePopup()">&times;</button>
+    <h2> ورود شما تایید شد </h2>
+    <p> register اشتراک فعال</p>
+  </div>
+</div>
+
+<style>
+  /* پاپ‌آپ همیشه بالاتر از همه */
+  .popup {
+    z-index: 1000000 !important;
+  }
+</style>
+
+
 <!-- MythicCraft Section -->
 <div id="mythic-section">
   <h1 id="mythic-title">MythicCraft</h1>
 
   <div id="mythic-info">
     <div><span class="label">Creator:</span> <span class="value">voidlord121</span></div>
-    <div><span class="label">Players:</span> <span class="value">300/?</span></div>
+    <div><span class="label">Players:</span> <span class="value players">300/?</span></div>
     <div><span class="label">Game Version:</span> <span class="value">1.20.1</span></div>
     <div><span class="label">Status:</span> <span class="value online">Online</span></div>
     <div><span class="label">Website:</span> 
@@ -443,10 +460,9 @@
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    z-index: 500; /* کمتر از پاپ‌آپ */
+    z-index: 500; /* پایین‌تر از پاپ‌آپ */
     font-family: monospace, Arial;
     user-select: none;
-    pointer-events: none; /* تا روی کلیک‌های بقیه بخش‌ها تاثیر نذاره */
   }
 
   /* عنوان اصلی */
@@ -457,7 +473,6 @@
     text-shadow: 0 0 15px #0ff, 0 0 30px #f0f, 0 0 45px #ff0;
     animation: rgb-glow 4s linear infinite, shake 6s infinite;
     margin-bottom: 35px;
-    pointer-events: auto;
   }
 
   /* RGB Glow */
@@ -485,7 +500,6 @@
     font-size: 20px;
     color: #ccc;
     text-align: left;
-    pointer-events: auto;
   }
 
   #mythic-info .label {
@@ -501,6 +515,14 @@
     font-family: "Courier New", monospace;
   }
 
+  /* Players سبز */
+  #mythic-info .players {
+    color: #00ff6a;
+    text-shadow: 0 0 12px rgba(0,255,100,0.9);
+    font-weight: bold;
+  }
+
+  /* Status */
   #mythic-info .online {
     color: #00ff6a;
     text-shadow: 0 0 12px rgba(0,255,100,0.9);
@@ -508,6 +530,7 @@
     font-size: 18px;
   }
 
+  /* لینک */
   #mythic-info .link {
     color: #ff5555;
     text-decoration: none;
@@ -519,8 +542,6 @@
     text-shadow: 0 0 20px rgba(255,150,150,1);
   }
 </style>
-
-
 
 
 
