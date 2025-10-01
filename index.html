@@ -17,404 +17,6 @@
     }
 
     @keyframes backgroundRGB {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    #loader {
-      position: fixed;
-      width: 100%;
-      height: 100vh;
-      background-color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 9999;
-    }
-
-    .neon-loader {
-      width: 80px;
-      height: 80px;
-      border: 8px solid;
-      border-color: #00f7ff transparent #ff00c8 transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    .loader-text {
-      color: #0ff;
-      font-size: 20px;
-      margin-top: 20px;
-      animation: glow 1s ease-in-out infinite alternate;
-    }
-
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-
-    @keyframes glow {
-      from {
-        text-shadow: 0 0 10px #0ff;
-      }
-      to {
-        text-shadow: 0 0 20px #0ff, 0 0 30px #0ff;
-      }
-    }
-
-    .popup {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-    }
-
-    .popup-content {
-      background: #111;
-      padding: 40px;
-      border-radius: 20px;
-      border: 2px solid cyan;
-      text-align: center;
-      box-shadow: 0 0 20px #0ff, 0 0 40px #f90, 0 0 60px #ff0;
-      animation: glowbox 2s infinite alternate;
-      position: relative;
-    }
-
-    @keyframes glowbox {
-      from {
-        box-shadow: 0 0 10px #0ff, 0 0 20px #f90;
-      }
-      to {
-        box-shadow: 0 0 20px #0ff, 0 0 40px #f90, 0 0 60px #ff0;
-      }
-    }
-
-    .popup h2,
-    .popup p {
-      margin: 10px 0;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 30px;
-      color: white;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      text-shadow: 0 0 5px #ff3, 0 0 10px #f90, 0 0 20px #f90, 0 0 30px #ff3;
-      transition: all 0.3s ease;
-      animation: neonPulse 2s infinite alternate;
-    }
-    .close-btn:hover {
-      color: #ffcc00;
-      text-shadow: 0 0 10px #ff3, 0 0 20px #ff9900, 0 0 40px #ffcc00, 0 0 60px #ffaa00;
-      transform: scale(1.2);
-    }
-
-    .connect-btn {
-      display: none;
-      margin: 30px auto;
-      padding: 15px 40px;
-      font-size: 20px;
-      background: limegreen;
-      border: none;
-      border-radius: 10px;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0, 0 0 40px #0f0;
-      transition: all 0.3s ease;
-      animation: neonPulseGreen 2s infinite alternate;
-    }
-    .connect-btn:hover {
-      background: #00cc00;
-      box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0, 0 0 80px #0f0;
-      transform: scale(1.1);
-    }
-
-    @keyframes neonPulse {
-      0% {
-        text-shadow: 0 0 5px #ff3, 0 0 10px #f90, 0 0 20px #f90, 0 0 30px #ff3;
-      }
-      100% {
-        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 40px #ffcc00, 0 0 60px #ffcc00;
-      }
-    }
-
-    @keyframes neonPulseGreen {
-      0% {
-        box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0, 0 0 40px #0f0;
-      }
-      100% {
-        box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0, 0 0 80px #0f0;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div id="loader">
-    <div class="neon-loader"></div>
-    <div class="loader-text">در حال بارگذاری...</div>
-  </div>
-
-
-
-  <center>
-    <button id="connectBtn" class="connect-btn" onclick="connectToMinecraft()">اتصال به سرور </button>
-  </center>
-
-  <script>
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-      }, 2000);
-    });
-
-    function closePopup() {
-      document.getElementById("popup").style.display = "none";
-      document.getElementById("connectBtn").style.display = "inline-block";
-    }
-
-    function connectToMinecraft() {
-      const ip = "wii1-rFFa.aternos.me:22481";
-      alert("برای اتصال به سرور Minecraft در TLauncher، این IP را کپی و وارد کنید: \n\n" + ip);
-    }
-  </script>
-
-  <!-- پشتیبانی آنلاین -->
-  <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-      var s1 = document.createElement("script"),
-        s0 = document.getElementsByTagName("script")[0];
-      s1.async = true;
-      s1.src = "https://embed.tawk.to/6888efa4db7610192eeae974/1j1beg73n";
-      s1.charset = "UTF-8";
-      s1.setAttribute("crossorigin", "*");
-      s0.parentNode.insertBefore(s1, s0);
-    })();
-  </script> 
-
-
-
-
-
-
-  
-
-<!-- Gaming Server Section (Independent) -->
-<div id="bm-server-section">
-  <button class="bm-btn" id="cs2-btn">CS2 Server</button>
-  <button class="bm-btn" id="mc-btn">BM Main Minecraft Server</button>
-</div>
-
-<!-- Modal for Minecraft Server -->
-<div id="mc-modal" class="bm-modal">
-  <div class="bm-modal-content">
-    <h2>Select Server</h2>
-    <label><input type="radio" name="mc-server" value="1"> Server 1</label><br>
-    <label><input type="radio" name="mc-server" value="2"> Server 2</label><br><br>
-    <button id="mc-enter" class="bm-enter">Enter</button>
-    <div id="mc-status" class="bm-status"></div>
-    <button id="mc-close" class="bm-close">Close</button>
-  </div>
-</div>
-
-<!-- Styles -->
-<style>
-  /* Base Section */
-  #bm-server-section {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 20px;
-    z-index: 99999;
-  }
-
-  /* Gaming Buttons */
-  .bm-btn {
-    padding: 12px 20px;
-    border: none;
-    border-radius: 12px;
-    background: linear-gradient(135deg, #0a0f2c, #1a2a5e);
-    color: #00c8ff;
-    font-size: 16px;
-    font-family: monospace;
-    cursor: pointer;
-    box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
-    transition: transform 0.2s, box-shadow 0.3s;
-  }
-  .bm-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 25px rgba(0, 200, 255, 0.9);
-  }
-
-  /* Modal */
-  .bm-modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(10, 15, 40, 0.8);
-    justify-content: center;
-    align-items: center;
-    z-index: 100000;
-  }
-  .bm-modal-content {
-    background: #111827;
-    color: #00c8ff;
-    padding: 20px;
-    border-radius: 14px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 0 25px rgba(0, 200, 255, 0.6);
-    font-family: monospace;
-  }
-
-  /* Status text */
-  .bm-status {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #ff4444;
-  }
-
-  /* Enter & Close Buttons */
-  .bm-enter {
-    background: #00ff88;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: black;
-    font-weight: bold;
-  }
-  .bm-close {
-    margin-top: 10px;
-    background: #ff4444;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 10px;
-    cursor: pointer;
-    color: white;
-  }
-
-  /* Loading Animation */
-  .bm-loading::after {
-    content: " .";
-    animation: dots 1s steps(5, end) infinite;
-  }
-  @keyframes dots {
-    0%, 20% { content: " ."; }
-    40% { content: " .."; }
-    60% { content: " ..."; }
-    80%, 100% { content: " ...."; }
-  }
-</style>
-
-<!-- Script -->
-<script>
-  // CS2 Server Button
-  document.getElementById("cs2-btn").onclick = function() {
-    let btn = this;
-    btn.innerText = "Connecting";
-    btn.classList.add("bm-loading");
-    setTimeout(() => {
-      btn.classList.remove("bm-loading");
-      btn.innerText = "Server Offline! Log Registered.";
-    }, 2000);
-  };
-
-  // Minecraft Modal
-  let mcModal = document.getElementById("mc-modal");
-  let mcBtn = document.getElementById("mc-btn");
-  let mcClose = document.getElementById("mc-close");
-  let mcEnter = document.getElementById("mc-enter");
-  let mcStatus = document.getElementById("mc-status");
-
-  mcBtn.onclick = () => {
-    mcModal.style.display = "flex";
-    mcStatus.innerText = "";
-  };
-  mcClose.onclick = () => {
-    mcModal.style.display = "none";
-  };
-
-  mcEnter.onclick = () => {
-    let selected = document.querySelector('input[name="mc-server"]:checked');
-    if (!selected) {
-      mcStatus.style.color = "#ff4444";
-      mcStatus.innerText = "Please select a server first.";
-      return;
-    }
-    mcStatus.style.color = "#00c8ff";
-    mcStatus.innerText = "Connecting";
-    mcStatus.classList.add("bm-loading");
-
-    if (selected.value === "1") {
-      setTimeout(() => {
-        mcStatus.classList.remove("bm-loading");
-        mcStatus.style.color = "#ff4444";
-        mcStatus.innerText = "Server 1 requires Admin Role.";
-      }, 3000);
-    } else {
-      setTimeout(() => {
-        mcStatus.classList.remove("bm-loading");
-        mcStatus.style.color = "#ff4444";
-        mcStatus.innerText = "Auto Connect Failed. IP Logged.";
-      }, 4000);
-    }
-  };
-</script>
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="fa">
-<head>
-  <meta charset="UTF-8" />
-  <title>ورود به سرور BM </title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Tahoma, sans-serif;
-      background: linear-gradient(270deg, #0f0c29, #302b63, #24243e);
-      background-size: 600% 600%;
-      animation: backgroundRGB 10s ease infinite;
-      color: white;
-      overflow: hidden;
-    }
-
-    @keyframes backgroundRGB {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
@@ -448,22 +50,28 @@
       animation: glow 1s ease-in-out infinite alternate;
     }
 
-    @keyframes spin { 100% { transform: rotate(360deg); } }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
     @keyframes glow {
       from { text-shadow: 0 0 10px #0ff; }
       to { text-shadow: 0 0 20px #0ff, 0 0 30px #0ff; }
     }
 
+    /* Popup */
     .popup {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 1000000 !important;
+      z-index: 1000000;
     }
 
     .popup-content {
@@ -482,6 +90,10 @@
       to { box-shadow: 0 0 20px #0ff, 0 0 40px #f90, 0 0 60px #ff0; }
     }
 
+    .popup h2, .popup p {
+      margin: 10px 0;
+    }
+
     .close-btn {
       position: absolute;
       top: 20px;
@@ -495,9 +107,16 @@
       transition: all 0.3s ease;
       animation: neonPulse 2s infinite alternate;
     }
+
     .close-btn:hover {
       color: #ffcc00;
+      text-shadow: 0 0 10px #ff3, 0 0 20px #f9900, 0 0 40px #ffcc00, 0 0 60px #ffaa00;
       transform: scale(1.2);
+    }
+
+    @keyframes neonPulse {
+      0% { text-shadow: 0 0 5px #ff3, 0 0 10px #f90, 0 0 20px #f90, 0 0 30px #ff3; }
+      100% { text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 40px #ffcc00, 0 0 60px #ffcc00; }
     }
 
     .connect-btn {
@@ -510,28 +129,173 @@
       border-radius: 10px;
       color: white;
       cursor: pointer;
-      box-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+      box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0, 0 0 40px #0f0;
+      transition: all 0.3s ease;
       animation: neonPulseGreen 2s infinite alternate;
     }
 
-    @keyframes neonPulse {
-      0% { text-shadow: 0 0 5px #ff3, 0 0 10px #f90; }
-      100% { text-shadow: 0 0 20px #ffcc00, 0 0 40px #ffcc00; }
+    .connect-btn:hover {
+      background: #00cc00;
+      box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0, 0 0 80px #0f0;
+      transform: scale(1.1);
     }
 
     @keyframes neonPulseGreen {
-      0% { box-shadow: 0 0 10px #0f0; }
-      100% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0; }
+      0% { box-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0, 0 0 40px #0f0; }
+      100% { box-shadow: 0 0 20px #0f0, 0 0 40px #0f0, 0 0 60px #0f0, 0 0 80px #0f0; }
     }
+
+    /* MythicCraft Section */
+    #mythic-section {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 500; 
+      font-family: monospace, Arial;
+      user-select: none;
+    }
+
+    #mythic-title {
+      font-size: 64px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 15px #0ff, 0 0 30px #f0f, 0 0 45px #ff0;
+      animation: rgb-glow 4s linear infinite, shake 6s infinite;
+      margin-bottom: 35px;
+    }
+
+    @keyframes rgb-glow {
+      0% { text-shadow: 0 0 20px red, 0 0 40px orange; }
+      25% { text-shadow: 0 0 20px lime, 0 0 40px cyan; }
+      50% { text-shadow: 0 0 20px blue, 0 0 40px violet; }
+      75% { text-shadow: 0 0 20px pink, 0 0 40px purple; }
+      100% { text-shadow: 0 0 20px red, 0 0 40px orange; }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+      25% { transform: translate(-50%, -50%) rotate(1.5deg); }
+      75% { transform: translate(-50%, -50%) rotate(-1.5deg); }
+    }
+
+    #mythic-info {
+      display: grid;
+      grid-template-columns: repeat(2, auto);
+      gap: 15px 40px;
+      justify-content: center;
+      font-size: 20px;
+      color: #ccc;
+      text-align: left;
+    }
+
+    #mythic-info .label {
+      color: #00c8ff;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    #mythic-info .value {
+      color: #fff;
+      font-size: 18px;
+      text-shadow: 0 0 12px rgba(0,200,255,0.8);
+      font-family: "Courier New", monospace;
+    }
+
+    /* Players سبز */
+    #mythic-info .players {
+      color: #00ff6a;
+      text-shadow: 0 0 12px rgba(0,255,100,0.9);
+      font-weight: bold;
+    }
+
+    #mythic-info .online {
+      color: #00ff6a;
+      text-shadow: 0 0 12px rgba(0,255,100,0.9);
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    #mythic-info .link {
+      color: #ff5555;
+      text-decoration: none;
+      text-shadow: 0 0 12px rgba(255,100,100,0.9);
+      transition: all 0.3s ease;
+    }
+
+    #mythic-info .link:hover {
+      color: #ff9999;
+      text-shadow: 0 0 20px rgba(255,150,150,1);
+    }
+
+    /* Server Section */
+    #bm-server-section {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 20px;
+      z-index: 99999;
+    }
+
+    .bm-btn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0a0f2c, #1a2a5e);
+      color: #00c8ff;
+      font-size: 16px;
+      font-family: monospace;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .bm-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(0, 200, 255, 0.9);
+    }
+
+    .bm-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(10, 15, 40, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 100000;
+    }
+    .bm-modal-content {
+      background: #111827;
+      color: #00c8ff;
+      padding: 20px;
+      border-radius: 14px;
+      text-align: center;
+      width: 300px;
+      box-shadow: 0 0 25px rgba(0, 200, 255, 0.6);
+      font-family: monospace;
+    }
+
+    .bm-status { margin-top: 15px; font-size: 14px; color: #ff4444; }
+    .bm-enter { background: #00ff88; border: none; padding: 10px 18px; border-radius: 10px; cursor: pointer; color: black; font-weight: bold; }
+    .bm-close { margin-top: 10px; background: #ff4444; border: none; padding: 8px 16px; border-radius: 10px; cursor: pointer; color: white; }
+
+    .bm-loading::after { content: " ."; animation: dots 1s steps(5, end) infinite; }
+    @keyframes dots {
+      0%,20% { content: " ."; } 40% { content: " .."; } 60% { content: " ..."; } 80%,100% { content: " ...."; }
+    }
+
   </style>
 </head>
 <body>
+
   <div id="loader">
     <div class="neon-loader"></div>
     <div class="loader-text">در حال بارگذاری...</div>
   </div>
 
-  <!-- Popup -->
+  <!-- Popup اصلاح شده -->
   <div class="popup" id="popup">
     <div class="popup-content">
       <button class="close-btn" onclick="closePopup()">&times;</button>
@@ -544,13 +308,44 @@
     <button id="connectBtn" class="connect-btn" onclick="connectToMinecraft()">اتصال به سرور </button>
   </center>
 
+  <!-- Server Section -->
+  <div id="bm-server-section">
+    <button class="bm-btn" id="cs2-btn">CS2 Server</button>
+    <button class="bm-btn" id="mc-btn">BM Main Minecraft Server</button>
+  </div>
+
+  <div id="mc-modal" class="bm-modal">
+    <div class="bm-modal-content">
+      <h2>Select Server</h2>
+      <label><input type="radio" name="mc-server" value="1"> Server 1</label><br>
+      <label><input type="radio" name="mc-server" value="2"> Server 2</label><br><br>
+      <button id="mc-enter" class="bm-enter">Enter</button>
+      <div id="mc-status" class="bm-status"></div>
+      <button id="mc-close" class="bm-close">Close</button>
+    </div>
+  </div>
+
+  <!-- MythicCraft Section -->
+  <div id="mythic-section">
+    <h1 id="mythic-title">MythicCraft</h1>
+    <div id="mythic-info">
+      <div><span class="label">Creator:</span> <span class="value">voidlord121</span></div>
+      <div><span class="label">Players:</span> <span class="value players">300/?</span></div>
+      <div><span class="label">Game Version:</span> <span class="value">1.20.1</span></div>
+      <div><span class="label">Status:</span> <span class="value online">Online</span></div>
+      <div><span class="label">Website:</span> 
+        <a href="https://madsmart13.github.io/verify/" target="_blank" class="value link">madsmart13.github.io/verify</a>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Loader
     window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-      }, 2000);
+      setTimeout(() => { document.getElementById("loader").style.display = "none"; }, 2000);
     });
 
+    // Popup
     function closePopup() {
       document.getElementById("popup").style.display = "none";
       document.getElementById("connectBtn").style.display = "inline-block";
@@ -560,14 +355,67 @@
       const ip = "wii1-rFFa.aternos.me:22481";
       alert("برای اتصال به سرور Minecraft در TLauncher، این IP را کپی و وارد کنید: \n\n" + ip);
     }
+
+    // CS2 Server
+    document.getElementById("cs2-btn").onclick = function() {
+      let btn = this;
+      btn.innerText = "Connecting";
+      btn.classList.add("bm-loading");
+      setTimeout(() => {
+        btn.classList.remove("bm-loading");
+        btn.innerText = "Server Offline! Log Registered.";
+      }, 2000);
+    };
+
+    // Minecraft Modal
+    let mcModal = document.getElementById("mc-modal");
+    let mcBtn = document.getElementById("mc-btn");
+    let mcClose = document.getElementById("mc-close");
+    let mcEnter = document.getElementById("mc-enter");
+    let mcStatus = document.getElementById("mc-status");
+
+    mcBtn.onclick = () => { mcModal.style.display = "flex"; mcStatus.innerText = ""; };
+    mcClose.onclick = () => { mcModal.style.display = "none"; };
+
+    mcEnter.onclick = () => {
+      let selected = document.querySelector('input[name="mc-server"]:checked');
+      if (!selected) {
+        mcStatus.style.color = "#ff4444";
+        mcStatus.innerText = "Please select a server first.";
+        return;
+      }
+      mcStatus.style.color = "#00c8ff";
+      mcStatus.innerText = "Connecting";
+      mcStatus.classList.add("bm-loading");
+
+      if (selected.value === "1") {
+        setTimeout(() => {
+          mcStatus.classList.remove("bm-loading");
+          mcStatus.style.color = "#ff4444";
+          mcStatus.innerText = "Server 1 requires Admin Role.";
+        }, 3000);
+      } else {
+        setTimeout(() => {
+          mcStatus.classList.remove("bm-loading");
+          mcStatus.style.color = "#ff4444";
+          mcStatus.innerText = "Auto Connect Failed. IP Logged.";
+        }, 4000);
+      }
+    };
   </script>
 
-  <!-- اینجا بقیه کدهای سرور و MythicCraft بمونه همونطور که هست -->
-</body>
-</html>
+  <!-- Tawk پشتیبانی -->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+      var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = "https://embed.tawk.to/6888efa4db7610192eeae974/1j1beg73n";
+      s1.charset = "UTF-8";
+      s1.setAttribute("crossorigin", "*");
+      s0.parentNode.insertBefore(s1, s0);
+    })();
+  </script>
 
-  
-
-  
 </body>
 </html>
