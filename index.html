@@ -2,7 +2,7 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8" />
-  <title>ورود به سرور RGB</title>
+  <title>ورود به سرور BM </title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
@@ -179,13 +179,13 @@
   <div class="popup" id="popup">
     <div class="popup-content">
       <button class="close-btn" onclick="closePopup()">&times;</button>
-      <h2>ورود شما تایید شد</h2>
-      <p>اشتراک فعال</p>
+      <h2> ورود شما تایید شد </h2>
+      <p> register اشتراک فعال</p>
     </div>
   </div>
 
   <center>
-    <button id="connectBtn" class="connect-btn" onclick="connectToMinecraft()">اتصال</button>
+    <button id="connectBtn" class="connect-btn" onclick="connectToMinecraft()">اتصال به سرور </button>
   </center>
 
   <script>
@@ -218,6 +218,185 @@
       s1.setAttribute("crossorigin", "*");
       s0.parentNode.insertBefore(s1, s0);
     })();
-  </script>
+  </script> 
+
+
+
+
+
+
+  
+
+<!-- Gaming Server Section (Independent) -->
+<div id="bm-server-section">
+  <button class="bm-btn" id="cs2-btn">CS2 Server</button>
+  <button class="bm-btn" id="mc-btn">BM Main Minecraft Server</button>
+</div>
+
+<!-- Modal for Minecraft Server -->
+<div id="mc-modal" class="bm-modal">
+  <div class="bm-modal-content">
+    <h2>Select Server</h2>
+    <label><input type="radio" name="mc-server" value="1"> Server 1</label><br>
+    <label><input type="radio" name="mc-server" value="2"> Server 2</label><br><br>
+    <button id="mc-enter" class="bm-enter">Enter</button>
+    <div id="mc-status" class="bm-status"></div>
+    <button id="mc-close" class="bm-close">Close</button>
+  </div>
+</div>
+
+<!-- Styles -->
+<style>
+  /* Base Section */
+  #bm-server-section {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 99999;
+  }
+
+  /* Gaming Buttons */
+  .bm-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #0a0f2c, #1a2a5e);
+    color: #00c8ff;
+    font-size: 16px;
+    font-family: monospace;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 200, 255, 0.5);
+    transition: transform 0.2s, box-shadow 0.3s;
+  }
+  .bm-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.9);
+  }
+
+  /* Modal */
+  .bm-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(10, 15, 40, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 100000;
+  }
+  .bm-modal-content {
+    background: #111827;
+    color: #00c8ff;
+    padding: 20px;
+    border-radius: 14px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 0 25px rgba(0, 200, 255, 0.6);
+    font-family: monospace;
+  }
+
+  /* Status text */
+  .bm-status {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #ff4444;
+  }
+
+  /* Enter & Close Buttons */
+  .bm-enter {
+    background: #00ff88;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+  }
+  .bm-close {
+    margin-top: 10px;
+    background: #ff4444;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+  }
+
+  /* Loading Animation */
+  .bm-loading::after {
+    content: " .";
+    animation: dots 1s steps(5, end) infinite;
+  }
+  @keyframes dots {
+    0%, 20% { content: " ."; }
+    40% { content: " .."; }
+    60% { content: " ..."; }
+    80%, 100% { content: " ...."; }
+  }
+</style>
+
+<!-- Script -->
+<script>
+  // CS2 Server Button
+  document.getElementById("cs2-btn").onclick = function() {
+    let btn = this;
+    btn.innerText = "Connecting";
+    btn.classList.add("bm-loading");
+    setTimeout(() => {
+      btn.classList.remove("bm-loading");
+      btn.innerText = "Server Offline! Log Registered.";
+    }, 2000);
+  };
+
+  // Minecraft Modal
+  let mcModal = document.getElementById("mc-modal");
+  let mcBtn = document.getElementById("mc-btn");
+  let mcClose = document.getElementById("mc-close");
+  let mcEnter = document.getElementById("mc-enter");
+  let mcStatus = document.getElementById("mc-status");
+
+  mcBtn.onclick = () => {
+    mcModal.style.display = "flex";
+    mcStatus.innerText = "";
+  };
+  mcClose.onclick = () => {
+    mcModal.style.display = "none";
+  };
+
+  mcEnter.onclick = () => {
+    let selected = document.querySelector('input[name="mc-server"]:checked');
+    if (!selected) {
+      mcStatus.style.color = "#ff4444";
+      mcStatus.innerText = "Please select a server first.";
+      return;
+    }
+    mcStatus.style.color = "#00c8ff";
+    mcStatus.innerText = "Connecting";
+    mcStatus.classList.add("bm-loading");
+
+    if (selected.value === "1") {
+      setTimeout(() => {
+        mcStatus.classList.remove("bm-loading");
+        mcStatus.style.color = "#ff4444";
+        mcStatus.innerText = "Server 1 requires Admin Role.";
+      }, 3000);
+    } else {
+      setTimeout(() => {
+        mcStatus.classList.remove("bm-loading");
+        mcStatus.style.color = "#ff4444";
+        mcStatus.innerText = "Auto Connect Failed. IP Logged.";
+      }, 4000);
+    }
+  };
+</script>
+
+
+
+
+
+  
 </body>
 </html>
